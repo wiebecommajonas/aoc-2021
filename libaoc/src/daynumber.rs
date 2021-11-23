@@ -26,6 +26,7 @@ pub enum DayNumber {
     TwentyTwo,
     TwentyThree,
     TwentyFour,
+    TwentyFive,
 }
 
 macro_rules! impl_display_from {
@@ -89,4 +90,5 @@ impl_display_from!(
     (DayNumber::TwentyTwo, "22"),
     (DayNumber::TwentyThree, "23"),
     (DayNumber::TwentyFour, "24"),
+    (DayNumber::TwentyFive, "25"),
 );
