@@ -74,11 +74,6 @@ impl<const Y: usize> Day<Y> {
     }
 
     fn load_input(&self) -> Result<String> {
-        let sessionid = match std::env::var("CURL_AOC_SESSION") {
-            Ok(id) => id,
-            Err(_) => return Err(DayError::SessionNotSet.into()),
-        };
-
         if Local::now().with_timezone(&Utc)
             < Utc.ymd(Y as i32, 12, self.number().into()).and_hms(5, 0, 0)
         {
@@ -91,6 +86,10 @@ impl<const Y: usize> Day<Y> {
         store_path.push("input.txt");
 
         if !store_path.exists() {
+            let sessionid = match std::env::var("CURL_AOC_SESSION") {
+                Ok(id) => id,
+                Err(_) => return Err(DayError::SessionNotSet.into()),
+            };
             let mut curl = curl::easy::Easy::new();
             curl.url(&self.input_url).unwrap();
             curl.follow_location(true).unwrap();
