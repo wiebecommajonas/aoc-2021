@@ -43,3 +43,6 @@ The binary [aoc](./aoc) is the main part and in it you will find my solutions fo
 | [24](aoc/src/days/twentyfour.rs) |  |  |  |
 | [25](aoc/src/days/twentyfive.rs) |  |  |  |
 -->
+
+## Other
+- [Haskell solutions 2020](https://github.com/wiebecommajonas/aoc-2020)
