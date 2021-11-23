@@ -1,13 +1,45 @@
 # AOC 2021
 
-This is supposed to be a commandline tool for the [adventofcode](https://adventofcode.com).
+This is supposed to be a commandline tool for the [adventofcode](https://adventofcode.com/2021).
 
 ## Library
 
 The [library](./libaoc) is essentially a helper to build the commandline tool. It automatically fetches the inputs of each day when they are needed.
 
-Using this library you can either build your own commandline tool, or you can modify the [existing one](./aoc) and add your own solutions.
+Using this library, you can either build your own commandline tool, or you can modify the [existing one](./aoc) and add your own solutions.
 
 ## Binary
 
 The binary [aoc](./aoc) is the main part and in it you will find my solutions for each day as an example. It uses the library and provides a commandline tool to run each day.
+
+## Progress
+
+| Day | Problem | Part 1 | Part 2 |
+| :-: |	:------- | :----: | :----: |
+| [1](aoc/src/days/one.rs) | Coming soon |  |  |
+<!--
+| [2](aoc/src/days/two.rs) |  |  |  |
+| [3](aoc/src/days/three.rs) |  |  |  |
+| [4](aoc/src/days/four.rs) |  |  |  |
+| [5](aoc/src/days/five.rs) |  |  |  |
+| [6](aoc/src/days/six.rs) |  |  |  |
+| [7](aoc/src/days/seven.rs) |  |  |  |
+| [8](aoc/src/days/eight.rs) |  |  |  |
+| [9](aoc/src/days/nine.rs) |  |  |  |
+| [10](aoc/src/days/ten.rs) |  |  |  |
+| [11](aoc/src/days/eleven.rs) |  |  |  |
+| [12](aoc/src/days/twelve.rs) |  |  |  |
+| [13](aoc/src/days/thirteem.rs) |  |  |  |
+| [14](aoc/src/days/fourteen.rs) |  |  |  |
+| [15](aoc/src/days/fifteen.rs) |  |  |  |
+| [16](aoc/src/days/sixteen.rs) |  |  |  |
+| [17](aoc/src/days/seventeen.rs) |  |  |  |
+| [18](aoc/src/days/eighteen.rs) |  |  |  |
+| [19](aoc/src/days/nineteeen.rs) |  |  |  |
+| [20](aoc/src/days/twenty.rs) |  |  |  |
+| [21](aoc/src/days/twentyone.rs) |  |  |  |
+| [22](aoc/src/days/twentytwo.rs) |  |  |  |
+| [23](aoc/src/days/twentythree.rs) |  |  |  |
+| [24](aoc/src/days/twentyfour.rs) |  |  |  |
+| [25](aoc/src/days/twentyfive.rs) |  |  |  |
+-->
