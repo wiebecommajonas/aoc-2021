@@ -14,6 +14,7 @@ fn main() {
     let mut aoc = Aoc::<2021>::new();
 
     aoc.add_day(days::one());
+    aoc.add_day(days::two());
 
     if let Some(("run", ms)) = matches.subcommand() {
         if let Some(values) = ms.values_of("day") {
@@ -26,7 +27,7 @@ fn main() {
 
         if ms.is_present("all") {
             if let Err(e) = aoc.run_days_all() {
-                eprintln!("{}", e);
+                println!("{}", e)
             }
         }
     }

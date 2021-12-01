@@ -21,7 +21,8 @@ type Result<T> = std::result::Result<T, Box<dyn std::error::Error>>;
 
 pub struct Day<const Y: usize> {
     number: DayNumber,
-    task: Box<dyn Fn(&str)>,
+    task1: Box<dyn Fn(&str)>,
+    task2: Box<dyn Fn(&str)>,
     input_url: String,
 }
 
@@ -65,10 +66,15 @@ impl<const Y: usize> Aoc<Y> {
 }
 
 impl<const Y: usize> Day<Y> {
-    pub fn new(day: DayNumber, task: impl Fn(&str) + 'static) -> Self {
+    pub fn new(
+        day: DayNumber,
+        task1: impl Fn(&str) + 'static,
+        task2: impl Fn(&str) + 'static,
+    ) -> Self {
         Self {
             number: day,
-            task: Box::new(task),
+            task1: Box::new(task1),
+            task2: Box::new(task2),
             input_url: format!("https://www.adventofcode.com/{}/day/{}/input", Y, day),
         }
     }
@@ -109,8 +115,15 @@ impl<const Y: usize> Day<Y> {
     pub fn run(&self) -> Result<()> {
         let input = self.load_input()?;
         println!("{}", format!("Running Day {}", self.number()).bold());
+        println!("Task 1");
         let start = std::time::Instant::now();
-        self.task(&input);
+        self.task1(&input);
+        let duration = start.elapsed();
+        println!("{}", format!("Time: {:?}", duration).bold());
+
+        println!("Task 2");
+        let start = std::time::Instant::now();
+        self.task2(&input);
         let duration = start.elapsed();
         println!("{}", format!("Time: {:?}", duration).bold());
         Ok(())
@@ -120,7 +133,11 @@ impl<const Y: usize> Day<Y> {
         self.number
     }
 
-    fn task(&self, input: &str) {
-        (self.task)(input);
+    fn task1(&self, input: &str) {
+        (self.task1)(input);
+    }
+
+    fn task2(&self, input: &str) {
+        (self.task2)(input);
     }
 }
