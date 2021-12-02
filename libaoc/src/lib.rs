@@ -54,7 +54,9 @@ impl<const Y: usize> Aoc<Y> {
     }
 
     pub fn run_days_all(&self) -> Result<()> {
-        for &day in self.days.keys() {
+        let mut keys = self.days.keys().collect::<Vec<&DayNumber>>();
+        keys.sort();
+        for &day in keys {
             self.run_day(day)?;
         }
         Ok(())
@@ -115,17 +117,18 @@ impl<const Y: usize> Day<Y> {
     pub fn run(&self) -> Result<()> {
         let input = self.load_input()?;
         println!("{}", format!("Running Day {}", self.number()).bold());
-        println!("Task 1");
+        println!("{}", "Task 1".bold());
         let start = std::time::Instant::now();
         self.task1(&input);
         let duration = start.elapsed();
         println!("{}", format!("Time: {:?}", duration).bold());
 
-        println!("Task 2");
+        println!("{}", "Task 2".bold());
         let start = std::time::Instant::now();
         self.task2(&input);
         let duration = start.elapsed();
         println!("{}", format!("Time: {:?}", duration).bold());
+        println!();
         Ok(())
     }
 
