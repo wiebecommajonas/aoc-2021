@@ -6,6 +6,7 @@ Cargo.lock
 .DS_Store
 
 # Project
-inputs
+inputs/*
+!2021
 .env
 
