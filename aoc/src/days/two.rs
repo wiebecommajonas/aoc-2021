@@ -6,12 +6,12 @@ pub fn two() -> Day<2021> {
         |input| {
             let (depth, horizontal) =
                 input
-                    .split('\n')
+                    .lines()
                     .fold((0, 0), |(depth, horizontal), instruction| {
                         if !instruction.is_empty() {
-                            let split = instruction.split(' ').collect::<Vec<&str>>();
-                            let number = split[1].parse::<u32>().unwrap();
-                            match split[0] {
+                            let (inst, str_num) = instruction.split_once(' ').unwrap();
+                            let number = str_num.parse::<u32>().unwrap();
+                            match inst {
                                 "forward" => (depth, horizontal + number),
                                 "down" => (depth + number, horizontal),
                                 "up" => (depth - number, horizontal),
@@ -26,12 +26,12 @@ pub fn two() -> Day<2021> {
         |input| {
             let (depth, horizontal, _aim) =
                 input
-                    .split('\n')
+                    .lines()
                     .fold((0, 0, 0), |(depth, horizontal, aim), instruction| {
                         if !instruction.is_empty() {
-                            let split = instruction.split(' ').collect::<Vec<&str>>();
-                            let number = split[1].parse::<u32>().unwrap();
-                            match split[0] {
+                            let (inst, str_num) = instruction.split_once(' ').unwrap();
+                            let number = str_num.parse::<u32>().unwrap();
+                            match inst {
                                 "forward" => (depth + aim * number, horizontal + number, aim),
                                 "down" => (depth, horizontal, aim + number),
                                 "up" => (depth, horizontal, aim - number),
