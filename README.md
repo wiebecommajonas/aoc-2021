@@ -6,8 +6,8 @@
 | :-: |	:------- | :----: | :----: |
 | [1](aoc/src/days/one.rs) | Sonar Sweep | ★ | ★ |
 | [2](aoc/src/days/two.rs) | Dive! | ★ | ★ |
+| [3](aoc/src/days/three.rs) | Binary Diagnostic | ★ | ★ |
 <!--
-| [3](aoc/src/days/three.rs) |  |  |  |
 | [4](aoc/src/days/four.rs) |  |  |  |
 | [5](aoc/src/days/five.rs) |  |  |  |
 | [6](aoc/src/days/six.rs) |  |  |  |
