@@ -1,23 +1,5 @@
 use libaoc::{Day, DayNumber};
 
-fn pow(base: u32, exp: u32) -> u32 {
-    let mut result = 1;
-    for i in 0..exp {
-        result *= base;
-    }
-    result
-}
-
-fn bin_to_dec(bin: &str) -> u32 {
-    let mut result = 0;
-    for i in 0..bin.len() {
-        if bin.get(i..i + 1).unwrap() == "1" {
-            result += pow(2, (bin.len() - 1 - i) as u32)
-        }
-    }
-    result
-}
-
 pub fn three() -> Day<2021> {
     Day::new(
         DayNumber::Three,
@@ -25,23 +7,19 @@ pub fn three() -> Day<2021> {
             let lines = input.lines().collect::<Vec<&str>>();
             let size = lines.len();
             let bits = lines[0].len();
-            let mut gamma = String::new();
-            let mut epsilon = String::new();
+            let mut gamma = 0;
 
             for i in 0..bits {
                 let ones = lines
                     .iter()
-                    .filter(|a| a.get(i..i + 1).unwrap() == "1")
+                    .filter(|&a| a.get(i..i + 1).unwrap() == "1")
                     .count();
-                if size > 2 * ones {
-                    gamma.push('0');
-                    epsilon.push('1');
-                } else {
-                    gamma.push('1');
-                    epsilon.push('0');
-                }
+                gamma = (gamma << 1) | (size <= 2 * ones) as u32;
             }
-            println!("{}", bin_to_dec(&gamma) * bin_to_dec(&epsilon));
+            println!(
+                "{}",
+                gamma * (gamma ^ u32::from_str_radix("111111111111", 2).unwrap())
+            );
         },
         |input| {
             let lines = input.lines().collect::<Vec<&str>>();
@@ -99,7 +77,10 @@ pub fn three() -> Day<2021> {
                 }
             }
 
-            println!("{}", bin_to_dec(&oxygen) * bin_to_dec(&co2));
+            println!(
+                "{}",
+                u32::from_str_radix(&oxygen, 2).unwrap() * u32::from_str_radix(&co2, 2).unwrap()
+            );
         },
     )
 }
