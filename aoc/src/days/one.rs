@@ -10,10 +10,10 @@ pub fn one() -> Day<2021> {
                     if num.is_empty() {
                         0
                     } else {
-                        num.parse::<u32>().unwrap()
+                        num.parse::<u16>().unwrap()
                     }
                 })
-                .collect::<Vec<u32>>()
+                .collect::<Vec<u16>>()
                 .windows(2)
                 .filter(|w| w[0] < w[1])
                 .count();
@@ -26,10 +26,10 @@ pub fn one() -> Day<2021> {
                     if num.is_empty() {
                         0
                     } else {
-                        num.parse::<u32>().unwrap()
+                        num.parse::<u16>().unwrap()
                     }
                 })
-                .collect::<Vec<u32>>()
+                .collect::<Vec<u16>>()
                 .windows(4)
                 .filter(|w| w[0] < w[3])
                 .count();
