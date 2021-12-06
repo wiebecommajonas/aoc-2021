@@ -9,7 +9,7 @@
 | [3](aoc/src/days/three.rs) | Binary Diagnostic | ★ | ★ |
 | [4](aoc/src/days/four.rs) | Giant Squid | ★ | ★ |
 | [5](aoc/src/days/five.rs) | Hydrothermal Venture | ★ | ★ |
-| [6](aoc/src/days/six.rs) | Lanternfish | ★ |  |
+| [6](aoc/src/days/six.rs) | Lanternfish | ★ | ★ |
 <!--
 | [7](aoc/src/days/seven.rs) |  |  |  |
 | [8](aoc/src/days/eight.rs) |  |  |  |
