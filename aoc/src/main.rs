@@ -19,6 +19,7 @@ fn main() {
     aoc.add_day(days::four());
     aoc.add_day(days::five());
     aoc.add_day(days::six());
+    aoc.add_day(days::seven());
 
     if let Some(("run", ms)) = matches.subcommand() {
         if let Some(values) = ms.values_of("day") {
