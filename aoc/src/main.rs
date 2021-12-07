@@ -20,9 +20,21 @@ fn main() {
     aoc.add_day(days::five());
     aoc.add_day(days::six());
     aoc.add_day(days::seven());
+    aoc.add_day(days::eight());
+
+    if let Some(("bench", ms)) = matches.subcommand() {
+        if let Some(values) = ms.values_of("bench_day") {
+            for i in values {
+                if let Err(e) = aoc.bench_day(DayNumber::from(i)) {
+                    eprintln!("{}", e);
+                }
+            }
+        }
+        return;
+    }
 
     if let Some(("run", ms)) = matches.subcommand() {
-        if let Some(values) = ms.values_of("day") {
+        if let Some(values) = ms.values_of("run_day") {
             for i in values {
                 if let Err(e) = aoc.run_day(DayNumber::from(i)) {
                     eprintln!("{}", e);
@@ -30,10 +42,12 @@ fn main() {
             }
         }
 
-        if ms.is_present("all") {
+        if ms.is_present("run_all") {
             if let Err(e) = aoc.run_days_all() {
                 println!("{}", e)
             }
         }
+
+        return;
     }
 }

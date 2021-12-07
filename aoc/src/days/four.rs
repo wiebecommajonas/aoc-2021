@@ -63,7 +63,7 @@ pub fn four() -> Day<2021> {
                 .flatten()
                 .collect::<Vec<(usize, bool)>>();
 
-            'outer: for &number in numbers.iter() {
+            for &number in numbers.iter() {
                 boards.iter_mut().for_each(|(n, marked)| {
                     if *n == number {
                         *marked = true
@@ -71,11 +71,11 @@ pub fn four() -> Day<2021> {
                 });
                 for board in 0..(boards.len() / BOARDSIZE) {
                     if let Some(result) = check_board(&boards, board) {
-                        println!("{}", result * number);
-                        break 'outer;
+                        return (result * number).to_string();
                     }
                 }
             }
+            unreachable!();
         },
         |input| {
             let numbers = input
@@ -111,7 +111,7 @@ pub fn four() -> Day<2021> {
                     }
                     if let Some(result) = check_board(&boards, board) {
                         if all_boards.len() == 1 && all_boards[0] == board {
-                            println!("{}", result * number);
+                            return (result * number).to_string();
                         }
                         all_boards = all_boards
                             .iter()
@@ -121,6 +121,7 @@ pub fn four() -> Day<2021> {
                     }
                 }
             }
+            unreachable!();
         },
     )
 }

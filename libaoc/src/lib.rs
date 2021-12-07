@@ -1,6 +1,7 @@
 mod daynumber;
 mod error;
 
+use criterion::Criterion;
 pub use daynumber::DayNumber;
 pub use error::{AocError, DayError};
 
@@ -21,8 +22,8 @@ type Result<T> = std::result::Result<T, Box<dyn std::error::Error>>;
 
 pub struct Day<const Y: usize> {
     number: DayNumber,
-    task1: Box<dyn Fn(&str)>,
-    task2: Box<dyn Fn(&str)>,
+    task1: Box<dyn Fn(&str) -> String>,
+    task2: Box<dyn Fn(&str) -> String>,
     input_url: String,
 }
 
@@ -62,6 +63,15 @@ impl<const Y: usize> Aoc<Y> {
         Ok(())
     }
 
+    pub fn bench_day(&self, day: DayNumber) -> Result<()> {
+        if let Some(d) = self.days.get(&day) {
+            d.bench()?;
+            Ok(())
+        } else {
+            Err(AocError::DayNotFound(day).into())
+        }
+    }
+
     pub fn year(&self) -> usize {
         Y
     }
@@ -70,8 +80,8 @@ impl<const Y: usize> Aoc<Y> {
 impl<const Y: usize> Day<Y> {
     pub fn new(
         day: DayNumber,
-        task1: impl Fn(&str) + 'static,
-        task2: impl Fn(&str) + 'static,
+        task1: impl Fn(&str) -> String + 'static,
+        task2: impl Fn(&str) -> String + 'static,
     ) -> Self {
         Self {
             number: day,
@@ -117,18 +127,46 @@ impl<const Y: usize> Day<Y> {
     pub fn run(&self) -> Result<()> {
         let input = self.load_input()?;
         println!("{}", format!("Running Day {}", self.number()).bold());
-        println!("{}", "Task 1".bold());
+        println!("{}", "Part 1".bold());
         let start = std::time::Instant::now();
-        self.task1(&input);
+        println!("{}", self.task1(&input));
+
         let duration = start.elapsed();
         println!("{}", format!("Time: {:?}", duration).bold());
 
-        println!("{}", "Task 2".bold());
+        println!("{}", "Part 2".bold());
         let start = std::time::Instant::now();
-        self.task2(&input);
+        println!("{}", self.task2(&input));
         let duration = start.elapsed();
         println!("{}", format!("Time: {:?}", duration).bold());
         println!();
+        Ok(())
+    }
+
+    fn bench_task1(&self, c: &mut Criterion) -> Result<()> {
+        let input = self.load_input()?;
+        c.bench_function(&format!("Day {} part 1", self.number()), |b| {
+            b.iter(|| self.task1(&input))
+        });
+        Ok(())
+    }
+
+    fn bench_task2(&self, c: &mut Criterion) -> Result<()> {
+        let input = self.load_input()?;
+        c.bench_function(&format!("Day {} part 2", self.number()), |b| {
+            b.iter(|| self.task2(&input))
+        });
+        Ok(())
+    }
+
+    pub fn bench(&self) -> Result<()> {
+        let mut criterion = Criterion::default()
+            .with_output_color(true)
+            .sample_size(500)
+            .plotting_backend(criterion::PlottingBackend::Gnuplot)
+            .with_plots();
+        self.bench_task1(&mut criterion)?;
+        self.bench_task2(&mut criterion)?;
         Ok(())
     }
 
@@ -136,11 +174,11 @@ impl<const Y: usize> Day<Y> {
         self.number
     }
 
-    fn task1(&self, input: &str) {
-        (self.task1)(input);
+    fn task1(&self, input: &str) -> String {
+        (self.task1)(input)
     }
 
-    fn task2(&self, input: &str) {
-        (self.task2)(input);
+    fn task2(&self, input: &str) -> String {
+        (self.task2)(input)
     }
 }

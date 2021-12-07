@@ -16,10 +16,7 @@ pub fn three() -> Day<2021> {
                 let ones = lines.iter().filter(|&a| ((*a >> i) & 1) != 0).count();
                 gamma = (gamma << 1) | (size <= 2 * ones) as u16;
             }
-            println!(
-                "{}",
-                gamma * (gamma ^ u16::from_str_radix("111111111111", 2).unwrap())
-            );
+            (gamma * (gamma ^ u16::from_str_radix("111111111111", 2).unwrap())).to_string()
         },
         |input| {
             let lines = input
@@ -70,7 +67,7 @@ pub fn three() -> Day<2021> {
                 }
             }
 
-            println!("{}", oxygen_data[0] * co2_data[0]);
+            (oxygen_data[0] * co2_data[0]).to_string()
         },
     )
 }

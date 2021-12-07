@@ -1,6 +1,6 @@
 use libaoc::{Day, DayNumber};
 
-fn solve<const TICKS: usize>(input: &str) {
+fn solve<const TICKS: usize>(input: &str) -> String {
     let fish: Vec<usize> = input
         .split_once('\n')
         .unwrap()
@@ -23,17 +23,13 @@ fn solve<const TICKS: usize>(input: &str) {
         counts = new_counts;
     }
 
-    println!("{}", counts.iter().sum::<usize>());
+    counts.iter().sum::<usize>().to_string()
 }
 
 pub fn six() -> Day<2021> {
     Day::new(
         DayNumber::Six,
-        |input| {
-            solve::<80>(input);
-        },
-        |input| {
-            solve::<256>(input);
-        },
+        |input| solve::<80>(input),
+        |input| solve::<256>(input),
     )
 }

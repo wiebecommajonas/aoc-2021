@@ -21,7 +21,7 @@ pub fn two() -> Day<2021> {
                             (depth, horizontal)
                         }
                     });
-            println!("{}", depth * horizontal);
+            (depth * horizontal).to_string()
         },
         |input| {
             let (depth, horizontal, _aim) =
@@ -41,7 +41,7 @@ pub fn two() -> Day<2021> {
                             (depth, horizontal, aim)
                         }
                     });
-            println!("{}", depth * horizontal);
+            (depth * horizontal).to_string()
         },
     )
 }

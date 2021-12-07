@@ -64,7 +64,7 @@ pub fn five() -> Day<2021> {
                 .filter(|&&intersecting| intersecting >= 2)
                 .count();
 
-            println!("{}", at_least_2_overlap);
+            at_least_2_overlap.to_string()
         },
         |input| {
             let mut points = HashMap::<(usize, usize), usize>::new();
@@ -144,23 +144,12 @@ pub fn five() -> Day<2021> {
                 }
             });
 
-            /* for i in 0..2000 {
-                for j in 0..1000 {
-                    if let Some(entry) = points.get(&(j, i)) {
-                        print!("{}", entry);
-                    } else {
-                        print!(".");
-                    }
-                }
-                println!();
-            } */
-
             let at_least_2_overlap = points
                 .values()
                 .filter(|&&intersecting| intersecting >= 2)
                 .count();
 
-            println!("{}", at_least_2_overlap);
+            at_least_2_overlap.to_string()
         },
     )
 }

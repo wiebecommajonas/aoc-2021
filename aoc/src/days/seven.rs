@@ -1,6 +1,6 @@
 use libaoc::{Day, DayNumber};
 
-fn solve<F>(input: &str, calc_fuel: F)
+fn solve<F>(input: &str, calc_fuel: F) -> String
 where
     F: Fn(usize, usize) -> usize,
 {
@@ -12,38 +12,32 @@ where
         .map(|number| number.parse().unwrap())
         .collect();
     let mut least_fuel = usize::MAX;
-    let mut alignment_value = 0;
+    let mut _alignment_value = 0;
 
     for i in 0..*numbers.iter().max().unwrap() {
         let new = numbers.iter().map(|&number| calc_fuel(number, i)).sum();
         if new < least_fuel {
             least_fuel = new;
-            alignment_value = i;
+            _alignment_value = i;
         }
     }
 
-    println!("{}: {}", alignment_value, least_fuel);
+    least_fuel.to_string()
+}
+
+pub fn sub_abs(a: usize, b: usize) -> usize {
+    let a = a as isize;
+    let b = b as isize;
+    (a - b).abs() as usize
 }
 
 pub fn seven() -> Day<2021> {
     Day::new(
         DayNumber::Seven,
+        |input| solve(input, sub_abs),
         |input| {
             solve(input, |number, alignment| {
-                if number >= alignment {
-                    number - alignment
-                } else {
-                    alignment - number
-                }
-            })
-        },
-        |input| {
-            solve(input, |number, alignment| {
-                if number >= alignment {
-                    (number - alignment) * (number - alignment + 1) / 2
-                } else {
-                    (alignment - number) * (alignment - number + 1) / 2
-                }
+                sub_abs(number, alignment) * (sub_abs(number, alignment) + 1) / 2
             })
         },
     )
