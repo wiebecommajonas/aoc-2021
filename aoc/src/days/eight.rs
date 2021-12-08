@@ -2,7 +2,7 @@ use std::collections::HashMap;
 
 use libaoc::{Day, DayNumber};
 
-fn decode(digits: &[&str], output: &[&str]) -> u32 {
+pub fn decode(digits: &[&str], output: &[&str]) -> u32 {
     assert_eq!(output.len(), 4);
     assert_eq!(digits.len(), 10);
     let mut mapping: HashMap<u32, &str> = HashMap::new();
@@ -190,4 +190,37 @@ pub fn eight() -> Day<2021> {
             sum.to_string()
         },
     )
+}
+
+#[cfg(test)]
+mod tests {
+    fn parse_line(input: &str) -> (Vec<&str>, Vec<&str>) {
+        let (digits_str, out_str) = input.split_once(" | ").unwrap();
+        (
+            digits_str.split_whitespace().collect(),
+            out_str.split_whitespace().collect(),
+        )
+    }
+
+    #[test]
+    pub fn decode_seven_segments() {
+        use crate::{days, parse};
+        let inputs = parse!(
+        parse_line,
+        "be cfbegad cbdgef fgaecd cgeb fdcge agebfd fecdb fabcd edb | fdgacbe cefdb cefbgd gcbe",
+        "edbfga begcd cbg gc gcadebf fbgde acbgfd abcde gfcbed gfec | fcgedb cgb dgebacf gc",
+        "fgaebd cg bdaec gdafb agbcfd gdcbef bgcad gfac gcb cdgabef | cg cg fdcagb cbg",
+        "fbegcd cbd adcefb dageb afcb bc aefdc ecdab fgdeca fcdbega | efabcd cedba gadfec cb",
+        "aecbfdg fbg gf bafeg dbefa fcge gcbea fcaegb dgceab fcbdga | gecf egdcabf bgf bfgea",
+        "fgeab ca afcebg bdacfeg cfaedg gcfdb baec bfadeg bafgc acf | gebdcfa ecba ca fadegcb",
+        "dbcfg fgd bdegcaf fgec aegbdf ecdfab fbedc dacgb gdcebf gf | cefg dcbef fcge gbcadfe",
+        "bdfegc cbegaf gecbf dfcage bdacg ed bedf ced adcbefg gebcd | ed bcgafe cdgba cbgef",
+        "egadfb cdbfeg cegd fecab cgb gbdefca cg fgcdab egfdb bfceg | gbdfcae bgc cg cgb",
+        "gcafb gcf dcaebfg ecagb gf abcdeg gaef cafbge fdbac fegbdc | fgae cfgab fg bagce"
+    );
+        let results = vec![8394, 9781, 1197, 9361, 4873, 8418, 4548, 1625, 8717, 4315];
+        for ((a, b), &r) in inputs.iter().zip(results.iter()) {
+            assert_eq!(days::eight::decode(a, b), r);
+        }
+    }
 }
