@@ -21,7 +21,7 @@ pub fn two() -> Day<2021> {
                             (depth, horizontal)
                         }
                     });
-            (depth * horizontal).to_string()
+            Box::new(depth * horizontal)
         },
         |input| {
             let (depth, horizontal, _aim) =
@@ -41,7 +41,7 @@ pub fn two() -> Day<2021> {
                             (depth, horizontal, aim)
                         }
                     });
-            (depth * horizontal).to_string()
+            Box::new(depth * horizontal)
         },
     )
 }

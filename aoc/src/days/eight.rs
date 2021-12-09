@@ -5,6 +5,7 @@ use libaoc::{Day, DayNumber};
 pub fn decode(digits: &[&str], output: &[&str]) -> u32 {
     assert_eq!(output.len(), 4);
     assert_eq!(digits.len(), 10);
+
     let mut mapping: HashMap<u32, &str> = HashMap::new();
 
     for &i in digits {
@@ -162,14 +163,21 @@ pub fn eight() -> Day<2021> {
     Day::new(
         DayNumber::Eight,
         |input| {
-            input
-                .lines()
-                .map(|line| line.split_once(" | ").unwrap().1)
-                .map(|display| display.split_whitespace().collect::<Vec<&str>>())
-                .flatten()
-                .filter(|&d| d.len() == 2 || d.len() == 3 || d.len() == 4 || d.len() == 7)
-                .count()
-                .to_string()
+            Box::new(
+                input
+                    .lines()
+                    .map(|line| {
+                        line.split_once(" | ")
+                            .unwrap()
+                            .1
+                            .split_whitespace()
+                            .filter(|&d| {
+                                d.len() == 2 || d.len() == 3 || d.len() == 4 || d.len() == 7
+                            })
+                            .count()
+                    })
+                    .sum::<usize>(),
+            )
         },
         |input| {
             let codes: Vec<(Vec<&str>, Vec<&str>)> = input
@@ -183,11 +191,12 @@ pub fn eight() -> Day<2021> {
                 })
                 .collect();
 
-            let sum = codes
-                .iter()
-                .map(|(digits, out)| decode(digits, out))
-                .sum::<u32>();
-            sum.to_string()
+            Box::new(
+                codes
+                    .iter()
+                    .map(|(digits, out)| decode(digits, out))
+                    .sum::<u32>(),
+            )
         },
     )
 }

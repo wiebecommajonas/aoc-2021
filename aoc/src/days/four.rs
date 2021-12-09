@@ -71,7 +71,7 @@ pub fn four() -> Day<2021> {
                 });
                 for board in 0..(boards.len() / BOARDSIZE) {
                     if let Some(result) = check_board(&boards, board) {
-                        return (result * number).to_string();
+                        return Box::new(result * number);
                     }
                 }
             }
@@ -111,7 +111,7 @@ pub fn four() -> Day<2021> {
                     }
                     if let Some(result) = check_board(&boards, board) {
                         if all_boards.len() == 1 && all_boards[0] == board {
-                            return (result * number).to_string();
+                            return Box::new(result * number);
                         }
                         all_boards = all_boards
                             .iter()

@@ -1,6 +1,6 @@
 use libaoc::{Day, DayNumber};
 
-fn solve<const WINDOWS: usize>(input: &str) -> String {
+fn solve<const WINDOWS: usize>(input: &str) -> Box<usize> {
     let result = input
         .lines()
         .map(|num| {
@@ -14,7 +14,7 @@ fn solve<const WINDOWS: usize>(input: &str) -> String {
         .windows(WINDOWS)
         .filter(|w| w[0] < w[WINDOWS - 1])
         .count();
-    result.to_string()
+    Box::new(result)
 }
 
 pub fn one() -> Day<2021> {

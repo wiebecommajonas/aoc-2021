@@ -9,7 +9,9 @@ use chrono::{Local, TimeZone, Utc};
 use colored::Colorize;
 use std::{
     collections::HashMap,
+    fmt::Display,
     path::{Path, PathBuf},
+    result,
     str::FromStr,
 };
 
@@ -22,8 +24,8 @@ type Result<T> = std::result::Result<T, Box<dyn std::error::Error>>;
 
 pub struct Day<const Y: usize> {
     number: DayNumber,
-    task1: Box<dyn Fn(&str) -> String>,
-    task2: Box<dyn Fn(&str) -> String>,
+    task1: Box<dyn Fn(&str) -> Box<dyn Display>>,
+    task2: Box<dyn Fn(&str) -> Box<dyn Display>>,
     input_url: String,
 }
 
@@ -80,8 +82,8 @@ impl<const Y: usize> Aoc<Y> {
 impl<const Y: usize> Day<Y> {
     pub fn new(
         day: DayNumber,
-        task1: impl Fn(&str) -> String + 'static,
-        task2: impl Fn(&str) -> String + 'static,
+        task1: impl Fn(&str) -> Box<dyn Display> + 'static,
+        task2: impl Fn(&str) -> Box<dyn Display> + 'static,
     ) -> Self {
         Self {
             number: day,
@@ -129,15 +131,16 @@ impl<const Y: usize> Day<Y> {
         println!("{}", format!("Running Day {}", self.number()).bold());
         println!("{}", "Part 1".bold());
         let start = std::time::Instant::now();
-        println!("{}", self.task1(&input));
-
+        let result = self.task1(&input);
         let duration = start.elapsed();
+        println!("{}", result);
         println!("{}", format!("Time: {:?}", duration).bold());
 
         println!("{}", "Part 2".bold());
         let start = std::time::Instant::now();
-        println!("{}", self.task2(&input));
+        let result = self.task2(&input);
         let duration = start.elapsed();
+        println!("{}", result);
         println!("{}", format!("Time: {:?}", duration).bold());
         println!();
         Ok(())
@@ -174,11 +177,11 @@ impl<const Y: usize> Day<Y> {
         self.number
     }
 
-    fn task1(&self, input: &str) -> String {
+    fn task1(&self, input: &str) -> impl Display {
         (self.task1)(input)
     }
 
-    fn task2(&self, input: &str) -> String {
+    fn task2(&self, input: &str) -> impl Display {
         (self.task2)(input)
     }
 }

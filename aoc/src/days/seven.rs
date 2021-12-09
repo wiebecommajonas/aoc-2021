@@ -1,6 +1,6 @@
 use libaoc::{Day, DayNumber};
 
-fn solve<F>(input: &str, calc_fuel: F) -> String
+fn solve<F>(input: &str, calc_fuel: F) -> Box<usize>
 where
     F: Fn(usize, usize) -> usize,
 {
@@ -22,7 +22,7 @@ where
         }
     }
 
-    least_fuel.to_string()
+    Box::new(least_fuel)
 }
 
 pub fn sub_abs(a: usize, b: usize) -> usize {
