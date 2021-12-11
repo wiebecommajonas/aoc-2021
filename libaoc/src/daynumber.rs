@@ -35,20 +35,20 @@ macro_rules! impl_display_from {
             fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
                 match self {
                     $(
-                        $n => write!(f, $s)?,
+                        $n => write!(f, "{}", $s.to_string())?,
                     )*
                 };
                 Ok(())
             }
         }
 
-        impl From<&str> for DayNumber {
-            fn from(other: &str) -> Self {
+        impl From<u32> for DayNumber {
+            fn from(other: u32) -> Self {
                 match other {
                     $(
                         $s => $n,
                     )*
-                    _ => panic!(""),
+                    _ => unreachable!(),
                 }
             }
         }
@@ -57,7 +57,7 @@ macro_rules! impl_display_from {
             fn from(other: DayNumber) -> Self {
                 match other {
                     $(
-                        $n => $s.parse::<u32>().unwrap(),
+                        $n => $s,
                     )*
                 }
             }
@@ -66,29 +66,29 @@ macro_rules! impl_display_from {
 }
 
 impl_display_from!(
-    (DayNumber::One, "1"),
-    (DayNumber::Two, "2"),
-    (DayNumber::Three, "3"),
-    (DayNumber::Four, "4"),
-    (DayNumber::Five, "5"),
-    (DayNumber::Six, "6"),
-    (DayNumber::Seven, "7"),
-    (DayNumber::Eight, "8"),
-    (DayNumber::Nine, "9"),
-    (DayNumber::Ten, "10"),
-    (DayNumber::Eleven, "11"),
-    (DayNumber::Twelve, "12"),
-    (DayNumber::Thirteen, "13"),
-    (DayNumber::Fourteen, "14"),
-    (DayNumber::Fifteen, "15"),
-    (DayNumber::Sixteen, "16"),
-    (DayNumber::Seventeen, "17"),
-    (DayNumber::Eighteen, "18"),
-    (DayNumber::Nineteen, "19"),
-    (DayNumber::Twenty, "20"),
-    (DayNumber::TwentyOne, "21"),
-    (DayNumber::TwentyTwo, "22"),
-    (DayNumber::TwentyThree, "23"),
-    (DayNumber::TwentyFour, "24"),
-    (DayNumber::TwentyFive, "25"),
+    (DayNumber::One, 1),
+    (DayNumber::Two, 2),
+    (DayNumber::Three, 3),
+    (DayNumber::Four, 4),
+    (DayNumber::Five, 5),
+    (DayNumber::Six, 6),
+    (DayNumber::Seven, 7),
+    (DayNumber::Eight, 8),
+    (DayNumber::Nine, 9),
+    (DayNumber::Ten, 10),
+    (DayNumber::Eleven, 11),
+    (DayNumber::Twelve, 12),
+    (DayNumber::Thirteen, 13),
+    (DayNumber::Fourteen, 14),
+    (DayNumber::Fifteen, 15),
+    (DayNumber::Sixteen, 16),
+    (DayNumber::Seventeen, 17),
+    (DayNumber::Eighteen, 18),
+    (DayNumber::Nineteen, 19),
+    (DayNumber::Twenty, 20),
+    (DayNumber::TwentyOne, 21),
+    (DayNumber::TwentyTwo, 22),
+    (DayNumber::TwentyThree, 23),
+    (DayNumber::TwentyFour, 24),
+    (DayNumber::TwentyFive, 25),
 );

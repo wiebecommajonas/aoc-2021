@@ -1,15 +1,16 @@
 #![feature(drain_filter)]
 
+mod cli;
 mod days;
 mod utils;
 
-use clap::{load_yaml, App};
+use crate::cli::Commands;
+use clap::StructOpt;
 use dotenv::dotenv;
 use libaoc::{Aoc, DayNumber};
 
 fn main() {
-    let yaml = load_yaml!("../cli.yaml");
-    let matches = App::from(yaml).get_matches();
+    let cli = cli::Cli::parse();
 
     dotenv().ok();
 
@@ -27,32 +28,28 @@ fn main() {
     aoc.add_day(days::ten());
     aoc.add_day(days::eleven());
 
-    if let Some(("bench", ms)) = matches.subcommand() {
-        if let Some(values) = ms.values_of("bench_day") {
-            for i in values {
-                if let Err(e) = aoc.bench_day(DayNumber::from(i)) {
-                    eprintln!("{}", e);
-                }
-            }
-        }
-        return;
-    }
-
-    if let Some(("run", ms)) = matches.subcommand() {
-        if let Some(values) = ms.values_of("run_day") {
-            for i in values {
+    match cli.command {
+        Commands::Run {
+            day: days,
+            all: false,
+        } => {
+            for i in days {
                 if let Err(e) = aoc.run_day(DayNumber::from(i)) {
                     eprintln!("{}", e);
                 }
             }
         }
-
-        if ms.is_present("run_all") {
+        Commands::Run { day: _, all: true } => {
             if let Err(e) = aoc.run_days_all() {
                 println!("{}", e)
             }
         }
-
-        return;
+        Commands::Bench { day: days } => {
+            for i in days {
+                if let Err(e) = aoc.bench_day(DayNumber::from(i)) {
+                    eprintln!("{}", e);
+                }
+            }
+        }
     }
 }
