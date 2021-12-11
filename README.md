@@ -14,8 +14,8 @@
 | [8](aoc/src/days/eight.rs) | Seven Segment Search | ★ | ★ |
 | [9](aoc/src/days/nine.rs) | Smoke Basin | ★ | ★ |
 | [10](aoc/src/days/ten.rs) | Syntax Scoring | ★ | ★ |
+| [11](aoc/src/days/eleven.rs) | Dumbo Octopus | ★ | ★ |
 <!--
-| [11](aoc/src/days/eleven.rs) |  |  |  |
 | [12](aoc/src/days/twelve.rs) |  |  |  |
 | [13](aoc/src/days/thirteem.rs) |  |  |  |
 | [14](aoc/src/days/fourteen.rs) |  |  |  |
