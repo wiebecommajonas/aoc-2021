@@ -12,9 +12,9 @@
 | [6](aoc/src/days/six.rs) | Lanternfish | ★ | ★ |
 | [7](aoc/src/days/seven.rs) | The Treachery of Whales | ★ | ★ |
 | [8](aoc/src/days/eight.rs) | Seven Segment Search | ★ | ★ |
+| [9](aoc/src/days/nine.rs) | Smoke Basin | ★ | ★ |
+| [10](aoc/src/days/ten.rs) | Syntax Scoring | ★ | ★ |
 <!--
-| [9](aoc/src/days/nine.rs) |  |  |  |
-| [10](aoc/src/days/ten.rs) |  |  |  |
 | [11](aoc/src/days/eleven.rs) |  |  |  |
 | [12](aoc/src/days/twelve.rs) |  |  |  |
 | [13](aoc/src/days/thirteem.rs) |  |  |  |

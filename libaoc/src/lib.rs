@@ -11,7 +11,6 @@ use std::{
     collections::HashMap,
     fmt::Display,
     path::{Path, PathBuf},
-    result,
     str::FromStr,
 };
 

@@ -5,6 +5,7 @@ mod nine;
 mod one;
 mod seven;
 mod six;
+mod ten;
 mod three;
 mod two;
 
@@ -15,5 +16,6 @@ pub use nine::nine;
 pub use one::one;
 pub use seven::seven;
 pub use six::six;
+pub use ten::ten;
 pub use three::three;
 pub use two::two;

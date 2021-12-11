@@ -1,11 +1,9 @@
+use libaoc::{Day, DayNumber};
 use std::collections::VecDeque;
 
-use colored::Colorize;
-use libaoc::{Day, DayNumber};
-
-fn find_adjacent(
+fn find_and_remove_adjacent(
     all_basin_points: &mut VecDeque<(usize, usize)>,
-    basin_points: &Vec<(usize, usize)>,
+    basin_points: &[(usize, usize)],
 ) -> Option<(usize, usize)> {
     for i in 0..all_basin_points.len() {
         for &point in basin_points {
@@ -106,27 +104,16 @@ pub fn nine() -> Day<2021> {
             while !basin_points.is_empty() {
                 let origin = basin_points.pop_front().unwrap();
                 let mut basin = vec![origin];
-                while let Some(adjacent) = find_adjacent(&mut basin_points, &basin) {
+                while let Some(adjacent) = find_and_remove_adjacent(&mut basin_points, &basin) {
                     basin.push(adjacent)
                 }
                 basins.push(basin);
             }
 
             let mut basin_sizes: Vec<usize> = basins.iter().map(|basin| basin.len()).collect();
-            let mut max_basin_sizes: Vec<usize> = vec![0; 3];
 
-            for i in 0..3 {
-                let mut max_index = 0;
-                for j in 0..basin_sizes.len() {
-                    if max_basin_sizes[i] < basin_sizes[j] {
-                        max_basin_sizes[i] = basin_sizes[j];
-                        max_index = j;
-                    }
-                }
-                basin_sizes.remove(max_index);
-            }
-
-            Box::new(max_basin_sizes.iter().product::<usize>())
+            basin_sizes.sort_unstable();
+            Box::new(basin_sizes.iter().rev().take(3).product::<usize>())
         },
     )
 }
