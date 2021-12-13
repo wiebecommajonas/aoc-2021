@@ -16,8 +16,8 @@
 | [10](aoc/src/days/ten.rs) | Syntax Scoring | ★ | ★ |
 | [11](aoc/src/days/eleven.rs) | Dumbo Octopus | ★ | ★ |
 | [12](aoc/src/days/twelve.rs) | Passage Pathing | ★ | ★ |
+| [13](aoc/src/days/thirteem.rs) | Transparent Origami | ★ | ★ |
 <!--
-| [13](aoc/src/days/thirteem.rs) |  |  |  |
 | [14](aoc/src/days/fourteen.rs) |  |  |  |
 | [15](aoc/src/days/fifteen.rs) |  |  |  |
 | [16](aoc/src/days/sixteen.rs) |  |  |  |
