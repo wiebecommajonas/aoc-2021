@@ -15,8 +15,8 @@
 | [9](aoc/src/days/nine.rs) | Smoke Basin | ★ | ★ |
 | [10](aoc/src/days/ten.rs) | Syntax Scoring | ★ | ★ |
 | [11](aoc/src/days/eleven.rs) | Dumbo Octopus | ★ | ★ |
+| [12](aoc/src/days/twelve.rs) | Passage Pathing | ★ | ★ |
 <!--
-| [12](aoc/src/days/twelve.rs) |  |  |  |
 | [13](aoc/src/days/thirteem.rs) |  |  |  |
 | [14](aoc/src/days/fourteen.rs) |  |  |  |
 | [15](aoc/src/days/fifteen.rs) |  |  |  |
