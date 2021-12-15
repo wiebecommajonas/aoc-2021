@@ -17,7 +17,7 @@
 | [11](aoc/src/days/eleven.rs) | Dumbo Octopus | ★ | ★ |
 | [12](aoc/src/days/twelve.rs) | Passage Pathing | ★ | ★ |
 | [13](aoc/src/days/thirteem.rs) | Transparent Origami | ★ | ★ |
-| [14](aoc/src/days/fourteen.rs) | Extended Polymerization | ★ |  |
+| [14](aoc/src/days/fourteen.rs) | Extended Polymerization | ★ | ★ |
 | [15](aoc/src/days/fifteen.rs) | Chiton | ★ | ★ |
 <!--
 | [16](aoc/src/days/sixteen.rs) |  |  |  |

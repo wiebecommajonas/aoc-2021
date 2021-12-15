@@ -1,11 +1,28 @@
-use std::collections::HashMap;
-
 use itertools::Itertools;
 use libaoc::{Day, DayNumber};
+use std::collections::HashMap;
 
 fn solve<const INSERTION_CYCLES: usize>(input: &str) -> usize {
     let (template_line, insert_lines) = input.split_once("\n\n").unwrap();
-    let mut template: Vec<char> = template_line.chars().collect();
+    let mut template: HashMap<(char, char), usize> = HashMap::new();
+    let mut char_counts: HashMap<char, usize> = HashMap::new();
+    template_line
+        .chars()
+        .tuple_windows::<(_, _)>()
+        .for_each(|pair| {
+            if let Some(count) = template.get_mut(&pair) {
+                *count += 1;
+            } else {
+                template.insert(pair, 1);
+            }
+        });
+    template_line.chars().for_each(|ch| {
+        if let Some(count) = char_counts.get_mut(&ch) {
+            *count += 1;
+        } else {
+            char_counts.insert(ch, 1);
+        }
+    });
 
     let mut insertions = HashMap::<(char, char), char>::new();
     insert_lines.lines().for_each(|line| {
@@ -15,32 +32,32 @@ fn solve<const INSERTION_CYCLES: usize>(input: &str) -> usize {
         insertions.insert((pair[0], pair[1]), insert);
     });
 
-    let mut prev_template = template.clone();
-    let mut insertion_count = 0;
     for _ in 0..INSERTION_CYCLES {
-        prev_template
-            .iter()
-            .tuple_windows::<(_, _)>()
-            .enumerate()
-            .for_each(|(idx, (char1, char2))| {
-                if let Some(char) = insertions.get(&(*char1, *char2)) {
-                    template.insert(idx + 1 + insertion_count, *char);
-                    insertion_count += 1;
+        let prev_template = template.clone();
+        let mut new_template = HashMap::new();
+        for (chars, a) in &prev_template {
+            if let Some(insert) = insertions.get(chars) {
+                if let Some(count) = new_template.get_mut(&(chars.0, *insert)) {
+                    *count += *a;
+                } else {
+                    new_template.insert((chars.0, *insert), *a);
                 }
-            });
-        prev_template = template.clone();
-        insertion_count = 0;
-    }
 
-    let mut char_counts = HashMap::<char, usize>::new();
+                if let Some(count) = new_template.get_mut(&(*insert, chars.1)) {
+                    *count += *a;
+                } else {
+                    new_template.insert((*insert, chars.1), *a);
+                }
 
-    template.iter().for_each(|char| {
-        if let Some(count) = char_counts.get_mut(char) {
-            *count += 1;
-        } else {
-            char_counts.insert(*char, 1);
+                if let Some(count) = char_counts.get_mut(insert) {
+                    *count += *a;
+                } else {
+                    char_counts.insert(*insert, *a);
+                }
+            }
         }
-    });
+        template = new_template;
+    }
 
     let mut values: Vec<&usize> = char_counts.values().collect();
     values.sort_unstable();
@@ -52,7 +69,7 @@ pub fn fourteen() -> Day<2021> {
     Day::new(
         DayNumber::Fourteen,
         |input| Box::new(solve::<10>(input)),
-        |input| Box::new("nope"),
+        |input| Box::new(solve::<40>(input)),
     )
 }
 
@@ -81,6 +98,6 @@ BC -> B
 CC -> N
 CN -> C";
         assert_eq!(solve::<10>(input), 1588);
-        // assert_eq!(solve::<40>(input), 2188189693529);
+        assert_eq!(solve::<40>(input), 2188189693529);
     }
 }

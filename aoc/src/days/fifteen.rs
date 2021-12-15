@@ -1,7 +1,7 @@
 use libaoc::{Day, DayNumber};
 use petgraph::{algo::dijkstra, prelude::NodeIndex, Directed, Graph};
 
-fn shortest_path(input: &Vec<Vec<usize>>) -> usize {
+fn shortest_path(input: &[Vec<usize>]) -> usize {
     let mut graph = Graph::<usize, usize, Directed>::new();
     let height = input.len();
     let width = input[0].len();
@@ -56,10 +56,10 @@ fn shortest_path(input: &Vec<Vec<usize>>) -> usize {
     *map.get(&nodes[nodes.len() - 1]).unwrap()
 }
 
-fn stitch_map(map: &Vec<Vec<usize>>) -> Vec<Vec<usize>> {
+fn stitch_map(map: &[Vec<usize>]) -> Vec<Vec<usize>> {
     let height = map.len();
 
-    let mut map_col_5 = map.clone();
+    let mut map_col_5: Vec<Vec<usize>> = map.to_vec();
     for i in 0..height {
         for j in 1..5 {
             map_col_5[i].append(
