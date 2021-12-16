@@ -19,8 +19,8 @@
 | [13](aoc/src/days/thirteem.rs) | Transparent Origami | ★ | ★ |
 | [14](aoc/src/days/fourteen.rs) | Extended Polymerization | ★ | ★ |
 | [15](aoc/src/days/fifteen.rs) | Chiton | ★ | ★ |
+| [16](aoc/src/days/sixteen.rs) | Packet Decoder | ★ | ★ |
 <!--
-| [16](aoc/src/days/sixteen.rs) |  |  |  |
 | [17](aoc/src/days/seventeen.rs) |  |  |  |
 | [18](aoc/src/days/eighteen.rs) |  |  |  |
 | [19](aoc/src/days/nineteeen.rs) |  |  |  |

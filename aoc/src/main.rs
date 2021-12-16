@@ -1,4 +1,5 @@
 #![feature(drain_filter)]
+#![feature(string_drain_as_str)]
 
 mod cli;
 mod days;
@@ -31,6 +32,7 @@ fn main() {
     aoc.add_day(days::thirteen());
     aoc.add_day(days::fourteen());
     aoc.add_day(days::fifteen());
+    aoc.add_day(days::sixteen());
 
     match cli.command {
         Commands::Run {
