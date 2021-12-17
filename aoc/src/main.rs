@@ -33,6 +33,7 @@ fn main() {
     aoc.add_day(days::fourteen());
     aoc.add_day(days::fifteen());
     aoc.add_day(days::sixteen());
+    aoc.add_day(days::seventeen());
 
     match cli.command {
         Commands::Run {

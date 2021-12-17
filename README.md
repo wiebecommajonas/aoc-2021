@@ -2,7 +2,7 @@
 
 ## Progress
 
-| Day | Problem | Part 1 | Part 2 |
+| Day | Problem | Part 1 | Part 2 |
 | :-: |	:------- | :----: | :----: |
 | [1](aoc/src/days/one.rs) | Sonar Sweep | ★ | ★ |
 | [2](aoc/src/days/two.rs) | Dive! | ★ | ★ |
@@ -20,8 +20,8 @@
 | [14](aoc/src/days/fourteen.rs) | Extended Polymerization | ★ | ★ |
 | [15](aoc/src/days/fifteen.rs) | Chiton | ★ | ★ |
 | [16](aoc/src/days/sixteen.rs) | Packet Decoder | ★ | ★ |
+| [17](aoc/src/days/seventeen.rs) | Trick Shot | ★ | ★ |
 <!--
-| [17](aoc/src/days/seventeen.rs) |  |  |  |
 | [18](aoc/src/days/eighteen.rs) |  |  |  |
 | [19](aoc/src/days/nineteeen.rs) |  |  |  |
 | [20](aoc/src/days/twenty.rs) |  |  |  |
