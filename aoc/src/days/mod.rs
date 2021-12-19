@@ -1,4 +1,5 @@
 mod eight;
+mod eighteen;
 mod eleven;
 mod fifteen;
 mod five;
@@ -17,6 +18,7 @@ mod twelve;
 mod two;
 
 pub use eight::eight;
+pub use eighteen::eighteen;
 pub use eleven::eleven;
 pub use fifteen::fifteen;
 pub use five::five;
